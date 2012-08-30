@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>binary-heap by bernerdschaefer</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>binary-heap</h1>
+        <p>Binary heap for node.js</p>
+
+        <p class="view"><a href="https://github.com/bernerdschaefer/binary-heap">View the Project on GitHub <small>bernerdschaefer/binary-heap</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/bernerdschaefer/binary-heap/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/bernerdschaefer/binary-heap/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/bernerdschaefer/binary-heap">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>A coffeescript implementation of a <a href="http://en.wikipedia.org/wiki/Binary_heap">binary
+heap</a> for node.js.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="p">{</span><span class="nx">BinaryHeap</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'binary-heap'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryHeap</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 2</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 3</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 4</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 5</span>
+</pre></div>
+
+<h4>new BinaryHeap()</h4>
+
+<p>Allocates a new binary heap with the default comparison function. Items
+added to the heap will be sorted from min-to-max.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryHeap</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 2</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 3</span>
+</pre></div>
+
+<h4>new BinaryHeap(compareFn)</h4>
+
+<p>Allocates a new binary heap with the provided custom comparison function. The
+comparison function should accept two arguments, and return true or false.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryHeap</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">y</span> <span class="p">})</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 3</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 2</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 1</span>
+</pre></div>
+
+<h4>heap.push(item, [...])</h4>
+
+<p>Inserts an item into its proper position on the heap. Also accepts
+multiple arguments like Array.push().</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryHeap</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 2</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 3</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 4</span>
+</pre></div>
+
+<h4>heap.pop()</h4>
+
+<p>Removes the next item from the heap and returns it.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryHeap</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 2</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// null</span>
+</pre></div>
+
+<h4>heap.peek()</h4>
+
+<p>Returns the next item from the heap, but doesn't remove it.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryHeap</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">peek</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">peek</span><span class="p">()</span> <span class="c1">// 1</span>
+</pre></div>
+
+<h4>heap.remove(item)</h4>
+
+<p>Removes the given item from the heap.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryHeap</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nx">heap</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// 3</span>
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/bernerdschaefer">bernerdschaefer</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
