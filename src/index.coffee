@@ -1,4 +1,4 @@
-class BinaryHeap
+exports.BinaryHeap = class BinaryHeap
   constructor: (@compare = (x, y) -> x < y) ->
     @list = []
 
@@ -51,5 +51,3 @@ class BinaryHeap
     if @compare(@list[index], @list[parent])
       @swap(parent, index)
       @swim(parent)
-
-exports.BinaryHeap = BinaryHeap
